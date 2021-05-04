@@ -18,4 +18,7 @@ ECHO Physical network interface(s):
 wmic NIC where "physicaladapter=TRUE" get MACAddress,ProductName | findstr /v /C:"Virtual"
 ECHO Currently active network interfaces:
 wmic nicconfig where ipenabled="TRUE" get description,macaddress,ipaddress,dhcpleaseobtained
+ECHO Display Adapters
+for /F "tokens=* skip=1" %%n in ('WMIC path Win32_VideoController get Name ^| findstr "."') do set GPU_NAME=%%n
+echo %GPU_NAME%
 PAUSE
